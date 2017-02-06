@@ -4,12 +4,16 @@ services:
     image: devopsil/puppetmaster
     tty: true
     stdin_open: true
+    volumes:
+      - ./puppet_server:/opt/puppet
   puppet_loadbalancer:
     image: devopsil/puppet
     tty: true
     stdin_open: true
     command: "tail -f /dev/null"
     links: ['puppet_server:puppet']
+    volumes:
+      - ./puppet_loadbalancer/etc/puppet:/etc/puppet
     depends_on:
       - puppet_server
   puppet_application_1:
