@@ -8,32 +8,6 @@ services:
     volumes:
       - ./puppet_server/etc/puppet:/etc/puppet
       - ./puppet_server/opt/puppet:/opt/puppet
-  puppet_loadbalancer:
-    image: devopsil/puppet
-    tty: true
-    stdin_open: true
-    command: "tail -f /dev/null"
-    links: ['puppet_server:puppet']
-    volumes:
-      - ./puppet_loadbalancer/etc/puppet:/etc/puppet
-    depends_on:
-      - puppet_server
-  puppet_application_1:
-    image: devopsil/puppet
-    command: "tail -f /dev/null"
-    links: ['puppet_server:puppet']
-    volumes:
-      - ./puppet_application_1/etc/puppet:/etc/puppet
-    depends_on:
-      - puppet_server
-  puppet_application_2:
-    image: devopsil/puppet
-    command: "tail -f /dev/null"
-    links: ['puppet_server:puppet']
-    volumes:
-      - ./puppet_application_2/etc/puppet:/etc/puppet
-    depends_on:
-      - puppet_server
   puppet_production_balancer:
     image: devopsil/puppet
     command: tail -f /dev/null
