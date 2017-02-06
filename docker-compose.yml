@@ -6,7 +6,8 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - ./puppet_server:/opt/puppet
+      - ./puppet_server/etc/puppet:/etc/puppet
+      - ./puppet_server/opt/puppet:/opt/puppet
   puppet_loadbalancer:
     image: devopsil/puppet
     tty: true

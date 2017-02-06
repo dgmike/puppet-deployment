@@ -8,6 +8,7 @@ down:
 
 update:
 	for CLIENT in ${CLIENTS}; do \
+		echo "$$CLIENT $$ puppet agent -t"; \
 		docker-compose exec $$CLIENT puppet agent -t; \
 	done
 
