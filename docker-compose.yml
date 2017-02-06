@@ -34,19 +34,3 @@ services:
       - ./puppet_application_2/etc/puppet:/etc/puppet
     depends_on:
       - puppet_server
-  puppet_application_3:
-    image: devopsil/puppet
-    command: "tail -f /dev/null"
-    links: ['puppet_server:puppet']
-    volumes:
-      - ./puppet_application_3/etc/puppet:/etc/puppet
-    depends_on:
-      - puppet_server
-  puppet_application_4:
-    image: devopsil/puppet
-    command: "tail -f /dev/null"
-    links: ['puppet_server:puppet']
-    volumes:
-      - ./puppet_application_4/etc/puppet:/etc/puppet
-    depends_on:
-      - puppet_server
