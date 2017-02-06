@@ -18,7 +18,9 @@ cert-list:
 clean:
 	docker ps -a | grep 'Exited' | awk '{print $$1}' | xargs -r -n1 docker rm
 
-rebuild: down clean up update cert-list
+build: clean up update cert-list
+
+rebuild: down build
 
 create_machinne:
 	@echo -n 'Environment: ' ; \
