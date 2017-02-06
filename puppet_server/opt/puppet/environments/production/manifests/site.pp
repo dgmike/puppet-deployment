@@ -1,6 +1,6 @@
 node default {}
 
-node 'puppet_loadbalancer' {
+node 'balancer' {
   package { 'vim-enhanced':
     ensure => present,
     allow_virtual => false,
