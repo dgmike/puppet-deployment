@@ -1,0 +1,38 @@
+version: "2"
+services:
+  puppet_server:
+    image: devopsil/puppetmaster
+    tty: true
+    stdin_open: true
+  puppet_loadbalancer:
+    image: devopsil/puppet
+    tty: true
+    stdin_open: true
+    command: "tail -f /dev/null"
+    links: ['puppet_server:puppet']
+    depends_on:
+      - puppet_server
+  puppet_application_1:
+    image: devopsil/puppet
+    command: "tail -f /dev/null"
+    links: ['puppet_server:puppet']
+    depends_on:
+      - puppet_server
+  puppet_application_2:
+    image: devopsil/puppet
+    command: "tail -f /dev/null"
+    links: ['puppet_server:puppet']
+    depends_on:
+      - puppet_server
+  puppet_application_3:
+    image: devopsil/puppet
+    command: "tail -f /dev/null"
+    links: ['puppet_server:puppet']
+    depends_on:
+      - puppet_server
+  puppet_application_4:
+    image: devopsil/puppet
+    command: "tail -f /dev/null"
+    links: ['puppet_server:puppet']
+    depends_on:
+      - puppet_server
