@@ -20,3 +20,4 @@ services:
     links: ['puppet_server:puppet']
     volumes: ['./production/app1/etc/puppet:/etc/puppet']
     depends_on: ['puppet_server']
+    ports: ['3000:80']
