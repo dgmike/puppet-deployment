@@ -3,11 +3,13 @@ app.configure({
   project: 'Mustache Test',
   description: 'Um simples projeto HTML com mustache.js',
   environment: '<%= @environment %>',
+  machinne: '<%= @clientcert %>',
 
   template: '<h1>{{project}}</h1>' +
     '<p>{{description}}</p>' +
     '<ul>' +
     '<li><strong>environment</strong>: {{environment}}</li>' +
     '<li><strong>version</strong>: {{version}}</li>' +
+    '<li><strong>machinne</strong>: {{machinne}}</li>' +
     '</ul>'
 });

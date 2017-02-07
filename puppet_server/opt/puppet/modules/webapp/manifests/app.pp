@@ -19,8 +19,8 @@ class webapp::app($version, $github_user, $github_project, $github_branch) {
   }
 
   file { $deploy_path:
-    group   => www-data,
-    owner   => www-data,
+    group   => $webapp::linux_group,
+    owner   => $webapp::linux_user,
     ensure  => directory,
     require => file['/srv/webapp/production'],
   }
