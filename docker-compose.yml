@@ -14,10 +14,3 @@ services:
     links: ['puppet_server:puppet']
     volumes: ['./production/balancer/etc/puppet:/etc/puppet']
     depends_on: ['puppet_server']
-  puppet_production_app1:
-    image: devopsil/puppet
-    command: tail -f /dev/null
-    links: ['puppet_server:puppet']
-    volumes: ['./production/app1/etc/puppet:/etc/puppet']
-    depends_on: ['puppet_server']
-    ports: ['3000:80']
