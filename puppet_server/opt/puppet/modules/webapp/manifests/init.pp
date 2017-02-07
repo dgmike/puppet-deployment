@@ -1,6 +1,18 @@
-class webapp {
+class webapp($version, $github_user, $github_project, $github_branch) {
+  class { 'webapp::app':
+    version        => $version,
+    github_user    => $github_user,
+    github_project => $github_project,
+    github_branch  => $github_branch,
+  }
+
+  class { 'webapp::configuration':
+    version => $version
+  }
+
   include webapp::nginx
   include webapp::users
   include webapp::directories
   include webapp::app
+  include webapp::configuration
 }

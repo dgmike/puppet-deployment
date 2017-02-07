@@ -8,8 +8,8 @@ down:
 
 update:
 	for CLIENT in ${CLIENTS}; do \
-		echo "$$CLIENT $$ puppet agent -t"; \
-		docker-compose exec $$CLIENT puppet agent -t || true; \
+		echo "$$CLIENT $$ puppet agent -tvd"; \
+		docker-compose exec $$CLIENT puppet agent -tvd || true; \
 	done
 
 cert-list:

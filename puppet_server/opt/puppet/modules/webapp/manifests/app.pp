@@ -1,24 +1,21 @@
-class webapp::app {
-  $github_user     = 'dgmike'
-  $github_project  = 'mustache-test'
-  $github_branch   = 'master'
-  $project_version = 'v1.0.13'
-
+class webapp::app($version, $github_user, $github_project, $github_branch) {
   $url         = "https://github.com/${github_user}/${github_project}/archive/${github_branch}.tar.gz"
-  $output_path = "/srv/webapp/production/src/${github_user}__${github_project}__${project_version}.tar.gz"
-  $deploy_path = "/srv/webapp/production/versions/${project_version}"
+  $output_path = "/srv/webapp/production/src/${github_user}__${github_project}__${version}.tar.gz"
+  $deploy_path = "/srv/webapp/production/versions/${version}"
 
-  $project_identifier = "${github_user}/${github_project}:${github_branch}::${project_version}"
+  $project_identifier = "${github_user}/${github_project}:${github_branch}::${version}"
 
   $curl_project_tag  = "curl project ${project_identifier}"
   $untar_project_tag = "untar project ${project_identifier}"
 
   exec { $curl_project_tag:
-    command   => "curl --location --max-redirs 10 '${url}' > '${output_path}'",
+    command   => "curl --location --max-redirs 10 '${url}' -o '${output_path}'",
     path      => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
     creates   => $output_path,
-    tries     => 3,
+    user      => root,
+    tries     => 5,
     try_sleep => 2,
+    require   => file['/srv/webapp/production/src']
   }
 
   file { $deploy_path:
@@ -32,6 +29,7 @@ class webapp::app {
     command   => "tar -C ${deploy_path} --strip-components=1 -zvxf ${output_path}",
     path      => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
     creates   => "${deploy_path}/index.html",
+    user      => root,
     require   => [exec[$curl_project_tag], file[$deploy_path]],
     tries     => 5,
     try_sleep => 2,

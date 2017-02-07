@@ -1,0 +1,4 @@
+webapp::github_user: dgmike
+webapp::github_project: mustache-test
+webapp::github_branch: master
+webapp::version: v0.0.1

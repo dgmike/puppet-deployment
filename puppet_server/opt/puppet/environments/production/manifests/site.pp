@@ -3,6 +3,6 @@ node default {}
 node 'balancer' {
 }
 
-node /^app\d+$/ {
+node /^(production_)?app\d+$/ {
   include webapp
 }
