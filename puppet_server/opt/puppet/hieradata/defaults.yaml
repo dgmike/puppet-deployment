@@ -1,10 +1,10 @@
----
 webapp::github_user: dgmike
 webapp::github_project: mustache-test
 webapp::github_branch: master
 webapp::main_version: v0.0.1
 webapp::linux_user: www-data
 webapp::linux_group: www-data
+
 deploy_strategy:
   groups:
     blue:

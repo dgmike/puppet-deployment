@@ -1,6 +1,5 @@
 class balancer {
   $deploy_strategy = hiera('deploy_strategy')
-  $domains = $deploy_strategy['groups']['group_a']['clients']
 
   package { 'haproxy':
     ensure        => present,

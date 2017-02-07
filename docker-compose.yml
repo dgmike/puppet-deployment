@@ -7,12 +7,12 @@ services:
     stdin_open: true
     volumes:
       - ./puppet_server/etc/puppet:/etc/puppet
-  puppet_production_balancer:
+      - ./puppet_server/opt/puppet:/opt/puppet
+  production_balancer:
     image: devopsil/puppet
     command: tail -f /dev/null
     links: ['puppet_server:puppet']
     volumes:
       - ./production/balancer/etc/puppet:/etc/puppet
-      - ./production/balancer/opt/haproxy:/opt/haproxy
     depends_on: ['puppet_server']
-    ports: ['5000:5000', '5001:5001']
+    ports: ['5000', '5001']
