@@ -1,4 +1,6 @@
-class webapp::app($version, $github_user, $github_project, $github_branch) {
+class webapp::app($main_version, $github_user, $github_project, $github_branch) {
+  $version     = $main_version
+
   $url         = "https://github.com/${github_user}/${github_project}/archive/${github_branch}.tar.gz"
   $output_path = "/srv/webapp/production/src/${github_user}__${github_project}__${version}.tar.gz"
   $deploy_path = "/srv/webapp/production/versions/${version}"

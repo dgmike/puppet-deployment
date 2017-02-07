@@ -1,20 +1,14 @@
+---
 webapp::github_user: dgmike
 webapp::github_project: mustache-test
 webapp::github_branch: master
-webapp::version: v0.0.1
+webapp::main_version: v0.0.1
 webapp::linux_user: www-data
 webapp::linux_group: www-data
-
 deploy_strategy:
   groups:
-    group_a:
+    blue:
       app_version: v0.0.1
       clients:
-        - puppet_production_blue1
-        - puppet_production_blue2
-        - puppet_production_blue3
-    group_b:
-      app_version: v0.0.2
-      clients:
-        - puppet_production_green1
-        - puppet_production_green2
+      - production_blue1
+      - production_blue2

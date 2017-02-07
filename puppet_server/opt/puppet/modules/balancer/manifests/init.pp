@@ -7,9 +7,15 @@ class balancer {
     allow_virtual => false,
   }
 
-  file { '/root/ips':
+  service { 'haproxy':
+    ensure  => running,
+    require => package[haproxy],
+  }
+
+  file { '/etc/haproxy/haproxy.cfg':
     owner   => root,
     group   => root,
-    content => template('balancer/ips.erb'),
+    notify  => service[haproxy],
+    content => template('balancer/haproxy.cfg.erb'),
   }
 }
