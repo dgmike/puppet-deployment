@@ -15,9 +15,10 @@ class webapp::nginx {
     require => package[nginx],
   }
 
-  file { '/etc/nginx/conf.d/000-webserver':
+  file { '/etc/nginx/conf.d/default.conf':
     owner    => root,
     require  => package[nginx],
-    content  => template('webapp/nginx/000-webserver.erb'),
+    content  => template('webapp/nginx/default.conf.erb'),
+    notify   => service['nginx'],
   }
 }
