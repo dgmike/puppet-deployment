@@ -1,10 +1,10 @@
-class webapp::users {
-  group { 'www-data':
+class webapp::users($user, $group) {
+  group { $group:
     ensure => present,
   }
 
-  user { 'www-data':
+  user { $user:
     ensure  => present,
-    require => group['www-data'],
+    require => group[$group],
   }
 }
