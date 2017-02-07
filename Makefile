@@ -13,7 +13,7 @@ down:
 update:
 	for CLIENT in ${CLIENTS}; do \
 		echo "$$CLIENT $$ puppet agent -t"; \
-		docker-compose exec $$CLIENT puppet agent -tvd || true; \
+		docker-compose exec $$CLIENT puppet agent -t || true; \
 	done
 
 cert-list:
