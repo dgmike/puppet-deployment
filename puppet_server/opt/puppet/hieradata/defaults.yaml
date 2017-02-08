@@ -9,4 +9,12 @@ deploy_strategy:
   groups:
     blue:
       app_version: v0.0.1
-      clients: []
+      clients:
+        - production_blue1
+        - production_blue2
+        - production_blue3
+    green:
+      app_version: v0.0.1
+      clients:
+        - production_green1
+        - production_green2
