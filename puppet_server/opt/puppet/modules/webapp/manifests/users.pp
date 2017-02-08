@@ -5,6 +5,6 @@ class webapp::users($user, $group) {
 
   user { $user:
     ensure  => present,
-    require => group[$group],
+    require => Group[$group],
   }
 }

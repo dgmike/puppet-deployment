@@ -7,18 +7,18 @@ class webapp::nginx {
   package { 'nginx':
     ensure        => present,
     allow_virtual => false,
-    require       => package[epel-release],
+    require       => Package[epel-release],
   }
 
   service { 'nginx':
     ensure  => running,
-    require => package[nginx],
+    require => Package[nginx],
   }
 
   file { '/etc/nginx/conf.d/default.conf':
     owner    => root,
-    require  => package[nginx],
+    require  => Package[nginx],
     content  => template('webapp/nginx/default.conf.erb'),
-    notify   => service['nginx'],
+    notify   => Service['nginx'],
   }
 }

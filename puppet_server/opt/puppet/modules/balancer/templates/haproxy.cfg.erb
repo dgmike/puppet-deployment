@@ -57,14 +57,12 @@ defaults
     timeout check           10s
     maxconn                 3000
 
-<% initial_port = 4999 %>
-
 <% @deploy_strategy['groups'].each do |group_name, group| %>
 #---------------------------------------------------------------------
 # <%= group_name %> frontend which proxys to the backends
 #---------------------------------------------------------------------
 
-frontend <%= group_name %>_main *:<%= initial_port += 1 %>
+frontend <%= group_name %>_main *:<%= group['frontend_port'] %>
     default_backend <%= group_name %>
 
 #---------------------------------------------------------------------
@@ -74,6 +72,6 @@ backend <%= group_name %>
     balance     roundrobin
 
     <% group['clients'].each do |domain| -%>
-    server  <%= domain %>     <%= IPSocket.getaddress domain -%>:80 check
+        server  <%= domain %>     <%= IPSocket.getaddress domain -%>:80 check
     <% end -%>
 <% end %>

@@ -15,14 +15,14 @@ class webapp::app($version, $github_user, $github_project, $github_branch) {
     user      => root,
     tries     => 5,
     try_sleep => 2,
-    require   => file['/srv/webapp/production/src']
+    require   => File['/srv/webapp/production/src']
   }
 
   file { $deploy_path:
     group   => $webapp::linux_group,
     owner   => $webapp::linux_user,
     ensure  => directory,
-    require => file['/srv/webapp/production'],
+    require => File['/srv/webapp/production'],
   }
 
   exec { $untar_project_tag:
@@ -30,7 +30,7 @@ class webapp::app($version, $github_user, $github_project, $github_branch) {
     path      => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
     creates   => "${deploy_path}/index.html",
     user      => root,
-    require   => [exec[$curl_project_tag], file[$deploy_path]],
+    require   => [Exec[$curl_project_tag], File[$deploy_path]],
     tries     => 5,
     try_sleep => 2,
   }
@@ -38,7 +38,7 @@ class webapp::app($version, $github_user, $github_project, $github_branch) {
   file { '/srv/webapp/production/current':
     ensure  => link,
     target  => $deploy_path,
-    require => [file[$deploy_path], package['nginx']],
-    notify  => service['nginx'],
+    require => [File[$deploy_path], Package['nginx']],
+    notify  => Service['nginx'],
   }
 }

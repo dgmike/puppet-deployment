@@ -3,34 +3,34 @@ class webapp::directories {
     group   => $webapp::linux_group,
     owner   => $webapp::linux_user,
     ensure  => directory,
-    require => [user[$webapp::linux_user]],
+    require => [User[$webapp::linux_user]],
   }
 
   file { '/srv/webapp':
     group   => $webapp::linux_group,
     owner   => $webapp::linux_user,
     ensure  => directory,
-    require => file['/srv'],
+    require => File['/srv'],
   }
 
   file { '/srv/webapp/production':
     group   => $webapp::linux_group,
     owner   => $webapp::linux_user,
     ensure  => directory,
-    require => file['/srv/webapp/'],
+    require => File['/srv/webapp/'],
   }
 
   file { '/srv/webapp/production/src':
     group   => $webapp::linux_group,
     owner   => $webapp::linux_user,
     ensure  => directory,
-    require => file['/srv/webapp/production'],
+    require => File['/srv/webapp/production'],
   }
 
   file { '/srv/webapp/production/versions':
     group   => $webapp::linux_group,
     owner   => $webapp::linux_user,
     ensure  => directory,
-    require => file['/srv/webapp/production'],
+    require => File['/srv/webapp/production'],
   }
 }

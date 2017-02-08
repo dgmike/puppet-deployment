@@ -1,0 +1,6 @@
+<%=
+  group = @deploy_strategy["groups"].select do |name, group|
+    group["clients"].include? @clientcert
+  end
+  group.size.zero? ? @main_version : group[0][1]["app_version"]
+%>

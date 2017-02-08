@@ -8,13 +8,13 @@ class balancer {
 
   service { 'haproxy':
     ensure  => running,
-    require => package[haproxy],
+    require => Package[haproxy],
   }
 
   file { '/etc/haproxy/haproxy.cfg':
     owner   => root,
     group   => root,
-    notify  => service[haproxy],
+    notify  => Service[haproxy],
     content => template('balancer/haproxy.cfg.erb'),
   }
 }

@@ -15,7 +15,12 @@ services:
     volumes:
       - ./production/balancer/etc/puppet:/etc/puppet
     depends_on: ['puppet_server']
-    ports: ['5000', '5001']
+    ports:
+      - '5001:5001'
+      - '5002:5002'
+      - '5003:5003'
+      - '5004:5004'
+      - '5005:5005'
   production_blue1:
     image: devopsil/puppet
     command: tail -f /dev/null
