@@ -1,0 +1,14 @@
+deploy_strategy:
+  groups:
+    blue:
+      app_version: v0.0.1
+      frontend_port: 5005
+      clients:
+        - staging_blue1
+        - staging_blue2
+    green:
+      app_version: v0.0.2
+      frontend_port: 5006
+      clients:
+        - staging_green1
+        - staging_green2

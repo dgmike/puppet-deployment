@@ -1,0 +1,14 @@
+deploy_strategy:
+  groups:
+    blue:
+      app_version: v0.0.2
+      frontend_port: 5003
+      clients:
+        - homolog_blue1
+        - homolog_blue2
+    green:
+      app_version: v0.0.3
+      frontend_port: 5004
+      clients:
+        - homolog_green1
+        - homolog_green2

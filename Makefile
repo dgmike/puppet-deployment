@@ -5,7 +5,7 @@ XARGS=$(shell if which gxargs > /dev/null; then echo 'gxargs'; else echo 'xargs'
 
 up:
 	docker-compose up -d
-	sleep 2
+	sleep 5
 
 down:
 	docker-compose down

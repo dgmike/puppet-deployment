@@ -12,15 +12,9 @@ services:
     image: devopsil/puppet
     command: tail -f /dev/null
     links: ['puppet_server:puppet']
-    volumes:
-      - ./production/balancer/etc/puppet:/etc/puppet
+    volumes: ['./production/balancer/etc/puppet:/etc/puppet']
     depends_on: ['puppet_server']
-    ports:
-      - '5001:5001'
-      - '5002:5002'
-      - '5003:5003'
-      - '5004:5004'
-      - '5005:5005'
+    ports: ['5001:5001', '5002:5002']
   production_blue1:
     image: devopsil/puppet
     command: tail -f /dev/null
@@ -51,3 +45,65 @@ services:
     links: ['puppet_server:puppet']
     volumes: ['./production/green2/etc/puppet:/etc/puppet']
     depends_on: ['puppet_server']
+  homolog_green1:
+    image: devopsil/puppet
+    command: tail -f /dev/null
+    links: ['puppet_server:puppet']
+    volumes: ['./homolog/green1/etc/puppet:/etc/puppet']
+    depends_on: ['puppet_server']
+  homolog_green2:
+    image: devopsil/puppet
+    command: tail -f /dev/null
+    links: ['puppet_server:puppet']
+    volumes: ['./homolog/green2/etc/puppet:/etc/puppet']
+    depends_on: ['puppet_server']
+  homolog_blue1:
+    image: devopsil/puppet
+    command: tail -f /dev/null
+    links: ['puppet_server:puppet']
+    volumes: ['./homolog/blue1/etc/puppet:/etc/puppet']
+    depends_on: ['puppet_server']
+  homolog_blue2:
+    image: devopsil/puppet
+    command: tail -f /dev/null
+    links: ['puppet_server:puppet']
+    volumes: ['./homolog/blue2/etc/puppet:/etc/puppet']
+    depends_on: ['puppet_server']
+  staging_green1:
+    image: devopsil/puppet
+    command: tail -f /dev/null
+    links: ['puppet_server:puppet']
+    volumes: ['./staging/green1/etc/puppet:/etc/puppet']
+    depends_on: ['puppet_server']
+  staging_green2:
+    image: devopsil/puppet
+    command: tail -f /dev/null
+    links: ['puppet_server:puppet']
+    volumes: ['./staging/green2/etc/puppet:/etc/puppet']
+    depends_on: ['puppet_server']
+  staging_blue1:
+    image: devopsil/puppet
+    command: tail -f /dev/null
+    links: ['puppet_server:puppet']
+    volumes: ['./staging/blue1/etc/puppet:/etc/puppet']
+    depends_on: ['puppet_server']
+  staging_blue2:
+    image: devopsil/puppet
+    command: tail -f /dev/null
+    links: ['puppet_server:puppet']
+    volumes: ['./staging/blue2/etc/puppet:/etc/puppet']
+    depends_on: ['puppet_server']
+  homolog_balancer:
+    image: devopsil/puppet
+    command: tail -f /dev/null
+    links: ['puppet_server:puppet']
+    volumes: ['./homolog/balancer/etc/puppet:/etc/puppet']
+    depends_on: ['puppet_server']
+    ports: ['5003:5003', '5004:5004']
+  staging_balancer:
+    image: devopsil/puppet
+    command: tail -f /dev/null
+    links: ['puppet_server:puppet']
+    volumes: ['./staging/balancer/etc/puppet:/etc/puppet']
+    depends_on: ['puppet_server']
+    ports: ['5005:5005', '5006:5006']
