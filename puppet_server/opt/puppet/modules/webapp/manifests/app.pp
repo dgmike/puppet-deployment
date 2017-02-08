@@ -1,7 +1,7 @@
 class webapp::app($version, $github_user, $github_project, $github_branch) {
   $url         = "https://github.com/${github_user}/${github_project}/archive/${github_branch}.tar.gz"
-  $output_path = "/srv/webapp/production/src/${github_user}__${github_project}__${version}.tar.gz"
-  $deploy_path = "/srv/webapp/production/versions/${version}"
+  $output_path = "/srv/webapp/${environment}/src/${github_user}__${github_project}__${version}.tar.gz"
+  $deploy_path = "/srv/webapp/${environment}/versions/${version}"
 
   $project_identifier = "${github_user}/${github_project}:${github_branch}::${version}"
 
@@ -15,14 +15,14 @@ class webapp::app($version, $github_user, $github_project, $github_branch) {
     user      => root,
     tries     => 5,
     try_sleep => 2,
-    require   => File['/srv/webapp/production/src']
+    require   => File["/srv/webapp/${environment}/src"]
   }
 
   file { $deploy_path:
     group   => $webapp::linux_group,
     owner   => $webapp::linux_user,
     ensure  => directory,
-    require => File['/srv/webapp/production'],
+    require => File["/srv/webapp/${environment}"],
   }
 
   exec { $untar_project_tag:
@@ -35,10 +35,18 @@ class webapp::app($version, $github_user, $github_project, $github_branch) {
     try_sleep => 2,
   }
 
-  file { '/srv/webapp/production/current':
+  file { "/srv/webapp/${environment}/current":
     ensure  => link,
     target  => $deploy_path,
     require => [File[$deploy_path], Package['nginx']],
     notify  => Service['nginx'],
+  }
+
+  file { "${deploy_path}/config.js":
+    owner    => $webapp::linux_user,
+    group    => $webapp::linux_group,
+    require  => [Exec[$untar_project_tag], File["/srv/webapp/${environment}/current"]],
+    content  => template('webapp/configuration/config.js.erb'),
+    notify   => Service['nginx'],
   }
 }

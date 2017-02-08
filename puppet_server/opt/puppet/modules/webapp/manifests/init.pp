@@ -15,13 +15,8 @@ class webapp($main_version, $github_user, $github_project, $github_branch, $linu
     github_branch  => $github_branch,
   }
 
-  class { 'webapp::configuration':
-    version => $version
-  }
-
   include webapp::nginx
   include webapp::users
   include webapp::directories
   include webapp::app
-  include webapp::configuration
 }

@@ -13,24 +13,24 @@ class webapp::directories {
     require => File['/srv'],
   }
 
-  file { '/srv/webapp/production':
+  file { "/srv/webapp/${environment}":
     group   => $webapp::linux_group,
     owner   => $webapp::linux_user,
     ensure  => directory,
     require => File['/srv/webapp/'],
   }
 
-  file { '/srv/webapp/production/src':
+  file { "/srv/webapp/${environment}/src":
     group   => $webapp::linux_group,
     owner   => $webapp::linux_user,
     ensure  => directory,
-    require => File['/srv/webapp/production'],
+    require => File["/srv/webapp/${environment}"],
   }
 
-  file { '/srv/webapp/production/versions':
+  file { "/srv/webapp/${environment}/versions":
     group   => $webapp::linux_group,
     owner   => $webapp::linux_user,
     ensure  => directory,
-    require => File['/srv/webapp/production'],
+    require => File["/srv/webapp/${environment}"],
   }
 }

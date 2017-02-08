@@ -6,7 +6,7 @@ server {
     listen       80 default_server;
     listen       [::]:80 default_server;
     server_name  webapp;
-    root         /srv/webapp/production/current;
+    root         /srv/webapp/<%= @environment %>/current;
 
     location / {
     }
